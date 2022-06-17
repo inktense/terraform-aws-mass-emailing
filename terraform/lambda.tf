@@ -3,12 +3,14 @@ module "lambda_emails_function" {
 
   function_name = "${var.project_prefix}-lambda"
   description   = "aws-mass-emailing-lambda"
-  handler       = "index.lambda_handler"
-  runtime       = "python3.8"
+  handler       = "lambdaHandler.handler"
+  runtime       = "nodejs14.x"
 
-  source_path = "../src/lambda-function1"
+  create_package         = false
+  local_existing_package = "./builds/lambda.zip"
+  # source_path = "../src/lambda-function1"
 
-  tags = {
-    Name = "my-lambda1"
-  }
+  tags = local.tags
+
+  depends_on = [data.archive_file.lambda_zip]
 }
