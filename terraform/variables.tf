@@ -9,3 +9,12 @@ variable "project_prefix" {
   type        = string
   default     = "aws-mass-emailing"
 }
+
+variable "tags" {
+  description = "A map containing all the mandatory tags for the resources."
+  type        = map(string)
+
+  default = {
+    Initialised = "20220617"
+  }
+}

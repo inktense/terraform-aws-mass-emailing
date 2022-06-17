@@ -29,4 +29,6 @@ module "s3_bucket" {
     }
   ]
 
+  tags = local.tags
+
 }
