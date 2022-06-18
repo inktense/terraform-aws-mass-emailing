@@ -15,5 +15,5 @@ module "dynamodb_email_table" {
     }
   ]
 
- tags = local.tags
+  tags = local.tags
 }

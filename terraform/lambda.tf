@@ -5,7 +5,7 @@ module "lambda_emails_function" {
   description   = "aws-mass-emailing-lambda"
   handler       = "lambdaHandler.handler"
   runtime       = "nodejs14.x"
-  publish = true
+  publish       = true
 
   create_package         = false
   local_existing_package = "./builds/lambda.zip"

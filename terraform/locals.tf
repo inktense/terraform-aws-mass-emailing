@@ -1,5 +1,5 @@
 locals {
   tags = merge(var.tags, {
-    Project     = var.project_prefix
+    Project = var.project_prefix
   })
 }
