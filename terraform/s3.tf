@@ -32,3 +32,13 @@ module "s3_bucket" {
   tags = local.tags
 
 }
+
+# Trigger lambda when .pdf file is added in Bucket
+resource "aws_s3_bucket_notification" "aws_lambda_trigger" {
+  bucket = module.s3_bucket.s3_bucket_id
+  lambda_function {
+    lambda_function_arn = module.lambda_emails_function.lambda_function_arn
+    events              = ["s3:ObjectCreated:*"]
+
+  }
+}
