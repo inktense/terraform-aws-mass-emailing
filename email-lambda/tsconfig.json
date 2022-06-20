@@ -5,7 +5,16 @@
     "target": "es6",
     "moduleResolution": "node",
     "sourceMap": true,
-    "outDir": "dist"
+    "skipLibCheck": true,
+    "outDir": "dist",
+    "removeComments": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": true,
+    "allowSyntheticDefaultImports": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
   },
   "include": [
     "./src/"
