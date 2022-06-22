@@ -10,6 +10,15 @@ module "lambda_emails_function" {
   create_package         = false
   local_existing_package = "./builds/lambda.zip"
 
+  attach_policy_statements = true
+    policy_statements = {
+    s3_read = {
+      effect    = "Allow",
+      actions   = ["s3:GetObject"],
+      resources = ["${module.s3_bucket.s3_bucket_arn}/*"]
+    }
+  }
+
   tags = local.tags
 
   depends_on = [data.archive_file.lambda_zip]
