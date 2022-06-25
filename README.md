@@ -69,7 +69,7 @@ Terraform will create an SES email identity but you will need to verify it.
 
 In order to tear down the entire infrastructure use:
 ```
-tf destroy
+tf destroy --var-file=var.tfvars
 ```
 
 --------------------------------
