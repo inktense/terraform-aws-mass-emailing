@@ -31,6 +31,6 @@ export const sendEmail = async (toEmailAddress: string, attachment: any): Promis
     return result
   } catch (err) {
     console.log("Error", err);
-    throw Error((err as any))
+    throw Error((err as string))
   }
 };

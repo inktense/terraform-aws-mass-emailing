@@ -10,10 +10,8 @@ export const getS3Document = async (bucket: string, key: string) => {
       Key: key,
     };
     const command = new GetObjectCommand(params);
-
     const data = await client.send(command);
-    console.log("CONTENT TYPE:", data);
-
+    
     return data;
   } catch (err) {
     console.log(err);

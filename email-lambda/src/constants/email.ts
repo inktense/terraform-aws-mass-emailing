@@ -8,7 +8,6 @@ export const emailParams = (fromEmailAddress: string, toEmailAddress: string, at
     attachments: [{
         filename: 'awesome_stuff.pdf',
         content: attachment.Body,
-        // href: 'C:/Users/Username/Desktop/somefile.pdf',
         contentType: attachment.ContentType
       }],
   };
