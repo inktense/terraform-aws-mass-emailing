@@ -25,6 +25,11 @@ module "lambda_emails_function" {
       actions   = ["s3:GetObject"],
       resources = ["${module.s3_bucket.s3_bucket_arn}/*"]
     }
+    dynamodb = {
+      effect    = "Allow",
+      actions   = ["dynamodb:Scan"],
+      resources = ["${module.dynamodb_email_table.dynamodb_table_arn}"]
+    }
   }
 
   environment_variables = {
