@@ -59,7 +59,7 @@ Terraform will create an SES email identity but you will need to verify it.
 
 **The DynamoDB table create will be empty.** For the purpose of this project I have added manually a couple of users to test. The objects need to have the following structure:
 
-```json
+```typescript
 {
  "id": string,
  "createdAt": string,
