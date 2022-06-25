@@ -75,4 +75,4 @@ tf destroy
 --------------------------------
 ## Testing functionality
 
-Open the AWS console. Search for S3 and upload a PDF file into the **aws-mass-emailing-attachment-bucket**. This should trigger the Lambda and users added into DynamoDB should expect an email containing that attachment.
+Open the AWS console. Search for S3 and upload a PDF file into the `aws-mass-emailing-attachment-bucket`. This should trigger the Lambda and users added into DynamoDB should expect an email containing that attachment.
