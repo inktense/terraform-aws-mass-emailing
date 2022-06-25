@@ -1,1 +1,2 @@
-email = example@test.com
+# Emails used as identity for SES
+email = "example@test.com"
