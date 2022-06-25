@@ -9,7 +9,7 @@ module "lambda_emails_function" {
 
   # store_on_s3 = true
   # s3_bucket   = module.lambda_zip_s3_bucket.s3_bucket_id
-  create_package      = false
+  create_package         = false
   local_existing_package = "./builds/lambda.zip"
   # s3_existing_package = {
   #   bucket = module.lambda_zip_s3_bucket.s3_bucket_id
@@ -20,7 +20,7 @@ module "lambda_emails_function" {
 
   attach_policy_statements = true
   policy_statements = {
-    s3_read = {
+    s3 = {
       effect    = "Allow",
       actions   = ["s3:GetObject"],
       resources = ["${module.s3_bucket.s3_bucket_arn}/*"]
@@ -30,11 +30,19 @@ module "lambda_emails_function" {
       actions   = ["dynamodb:Scan"],
       resources = ["${module.dynamodb_email_table.dynamodb_table_arn}"]
     }
+    # ses = {
+    #   effect = "Allow",
+    #   actions = [
+    #     "ses:SendEmail",
+    #     "ses:SendRawEmail"
+    #   ]
+    # }
   }
 
   environment_variables = {
-    REGION      = var.aws_region,
-    EMAIL_TABLE = module.dynamodb_email_table.dynamodb_table_id
+    REGION             = var.aws_region,
+    EMAIL_TABLE        = module.dynamodb_email_table.dynamodb_table_id
+    FROM_EMAIL_ADDRESS = aws_ses_email_identity.verified_email.email
   }
 
   tags = local.tags

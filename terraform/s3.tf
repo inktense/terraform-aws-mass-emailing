@@ -71,7 +71,7 @@ module "lambda_zip_s3_bucket" {
 resource "aws_s3_object" "file_upload" {
   bucket = module.lambda_zip_s3_bucket.s3_bucket_id
   key    = "lambda-functions/${var.project_prefix}-lambda.zip"
-  source = "./builds/lambda.zip"# its mean it depended on zip
+  source = "./builds/lambda.zip" # its mean it depended on zip
 }
 
 # Trigger lambda when .pdf file is added in Bucket
