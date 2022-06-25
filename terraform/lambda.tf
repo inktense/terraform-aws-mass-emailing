@@ -7,16 +7,29 @@ module "lambda_emails_function" {
   runtime       = "nodejs14.x"
   publish       = true
 
-  create_package         = false
+  # store_on_s3 = true
+  # s3_bucket   = module.lambda_zip_s3_bucket.s3_bucket_id
+  create_package      = false
   local_existing_package = "./builds/lambda.zip"
+  # s3_existing_package = {
+  #   bucket = module.lambda_zip_s3_bucket.s3_bucket_id
+  #   key    = aws_s3_object.file_upload.id
+  # }
+  # create_package         = false
+  # local_existing_package = data.null_data_source.lambda_package.outputs["filename"]
 
   attach_policy_statements = true
-    policy_statements = {
+  policy_statements = {
     s3_read = {
       effect    = "Allow",
       actions   = ["s3:GetObject"],
       resources = ["${module.s3_bucket.s3_bucket_arn}/*"]
     }
+  }
+
+  environment_variables = {
+    REGION      = var.aws_region,
+    EMAIL_TABLE = module.dynamodb_email_table.dynamodb_table_id
   }
 
   tags = local.tags

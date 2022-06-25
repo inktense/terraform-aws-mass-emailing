@@ -1,6 +1,7 @@
 import { Handler, S3Event, Context } from "aws-lambda"
 
 import { getS3Document } from "./services/S3"
+import { getAllData } from "./services/dynamodb"
 
 export const handler: Handler = async (event: S3Event, context: Context): Promise<void> => {
 
@@ -10,9 +11,10 @@ export const handler: Handler = async (event: S3Event, context: Context): Promis
   console.log("event => ", event, "context => ", context)
   try {
     await getS3Document(bucket, key)
-    console.log("hello world")
+    const emails = await getAllData()
+    console.log("hello emails => ", emails)
   } catch (err) {
     console.error(`Error`)
-    throw Error(err)
+    throw Error(err as string)
   }
 }
