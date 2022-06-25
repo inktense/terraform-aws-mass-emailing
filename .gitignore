@@ -37,3 +37,6 @@ npm-debug.log
 # dist folder
 dist/
 builds/
+
+# Environment variables
+*.tfvars

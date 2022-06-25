@@ -1,27 +1,15 @@
-export const emailParams = (fromEmailAddress: string, toEmailAddress: string) => {
-    console.log("fromEmailAddress ", fromEmailAddress, "toEmailAddress ", toEmailAddress)
+export const emailParams = (fromEmailAddress: string, toEmailAddress: string, attachment: any) => {
   return {
-    Destination: {
-      CcAddresses: [],
-      ToAddresses: [ toEmailAddress ], //RECEIVER_ADDRESS
-    },
-    Message: {
-      Body: {
-        Html: {
-          Charset: "UTF-8",
-          Data: "HTML_FORMAT_BODY",
-        },
-        Text: {
-          Charset: "UTF-8",
-          Data: "TEXT_FORMAT_BODY",
-        },
-      },
-      Subject: {
-        Charset: "UTF-8",
-        Data: "Hello World",
-      },
-    },
-    Source: fromEmailAddress, // SENDER_ADDRESS
-    ReplyToAddresses: [],
+    from: fromEmailAddress,
+    to: toEmailAddress,
+
+    subject: 'AWS SES attachment example ✓ ' + Date.now(),
+    text: 'I hope this message gets sent! You can find the pdf attachment below.',
+    attachments: [{
+        filename: 'awesome_stuff.pdf',
+        content: attachment.Body,
+        // href: 'C:/Users/Username/Desktop/somefile.pdf',
+        contentType: attachment.ContentType
+      }],
   };
 };

@@ -1,7 +1,6 @@
-import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
+import * as aws from "@aws-sdk/client-ses";
+import * as nodemailer from "nodemailer";
 import { emailParams } from "../constants/email";
-
-const sesClient = new SESClient({ region: process.env.REGION });
 
 if (!process.env.FROM_EMAIL_ADDRESS) {
   console.warn(
@@ -9,15 +8,29 @@ if (!process.env.FROM_EMAIL_ADDRESS) {
   );
 }
 
-export const sendEmail = async (toEmailAddress: string, attachment: any) => {
-  console.log("toEmailAddress => ", toEmailAddress);
-  const params = emailParams(process.env.FROM_EMAIL_ADDRESS || '', toEmailAddress);
+// Create the SES client instance
+const ses = new aws.SES({
+  apiVersion: "2010-12-01",
+  region: process.env.REGION,
+});
+
+// create Nodemailer SES transporter
+const transporter = nodemailer.createTransport({
+  SES: { ses, aws },
+});
+
+export const sendEmail = async (toEmailAddress: string, attachment: any): Promise<nodemailer.SendMailOptions | null> => {
+  const params = emailParams(
+    process.env.FROM_EMAIL_ADDRESS || "",
+    toEmailAddress,
+    attachment
+  );
 
   try {
-    const data = await sesClient.send(new SendEmailCommand(params));
-    console.log("Success", data);
-    return data;
+    const result = transporter.sendMail(params)
+    return result
   } catch (err) {
     console.log("Error", err);
+    throw Error((err as any))
   }
 };

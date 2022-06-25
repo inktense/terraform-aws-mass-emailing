@@ -30,13 +30,14 @@ module "lambda_emails_function" {
       actions   = ["dynamodb:Scan"],
       resources = ["${module.dynamodb_email_table.dynamodb_table_arn}"]
     }
-    # ses = {
-    #   effect = "Allow",
-    #   actions = [
-    #     "ses:SendEmail",
-    #     "ses:SendRawEmail"
-    #   ]
-    # }
+    ses = {
+      effect = "Allow",
+      actions = [
+        "ses:SendEmail",
+        "ses:SendRawEmail"
+      ]
+      resources = ["${aws_ses_email_identity.verified_email.arn}"]
+    }
   }
 
   environment_variables = {

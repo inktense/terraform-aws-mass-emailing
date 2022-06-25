@@ -18,3 +18,8 @@ variable "tags" {
     Initialised = "20220617"
   }
 }
+
+variable "email" {
+  description = "Ses email identity."
+  type        = string
+}

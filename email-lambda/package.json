@@ -16,11 +16,13 @@
     "@aws-sdk/client-s3": "^3.113.0",
     "@aws-sdk/client-ses": "^3.118.0",
     "aws-lambda": "^1.0.7",
-    "aws-sdk": "^2.1157.0"
+    "aws-sdk": "^2.1157.0",
+    "nodemailer": "^6.7.5"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.100",
     "@types/node": "^18.0.0",
+    "@types/nodemailer": "^6.4.4",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
     "@typescript-eslint/parser": "^5.28.0",
     "eslint": "^8.17.0",

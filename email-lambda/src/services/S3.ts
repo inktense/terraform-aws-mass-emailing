@@ -11,10 +11,10 @@ export const getS3Document = async (bucket: string, key: string) => {
     };
     const command = new GetObjectCommand(params);
 
-    const { ContentType } = await client.send(command);
-    console.log("CONTENT TYPE:", ContentType);
+    const data = await client.send(command);
+    console.log("CONTENT TYPE:", data);
 
-    return ContentType;
+    return data;
   } catch (err) {
     console.log(err);
     const message = `Error getting object ${key} from bucket ${bucket}. Make sure they exist and your bucket is in the same region as this function.`;
